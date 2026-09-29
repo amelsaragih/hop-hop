@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hop Hop — AI English Learning Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+  <div class="sticker-layer" aria-hidden="true">
+    <img class="sticker pal pal-tiger s-a" src="assets/pals/tiger.png" alt="">
+    <img class="sticker pal pal-pig s-b" src="assets/pals/pig.png" alt="">
+    <img class="sticker pal pal-frog s-c" src="assets/pals/frog.png" alt="">
+    <img class="sticker pal pal-shiba s-d" src="assets/pals/shiba.png" alt="">
+    <img class="sticker pal pal-fox s-e" src="assets/pals/fox.png" alt="">
+    <img class="sticker pal pal-lion s-f" src="assets/pals/lion.png" alt="">
+  </div>
+
+  <div class="app-shell agent-shell">
+    <header class="topbar">
+      <a class="app-brand" href="#chat" data-section="chat" aria-label="Hop Hop Home">
+        <span class="brand-avatar"><img src="assets/hophop-avatar.png" alt="Hop Hop"></span>
+        <span class="brand-name">Hop Hop</span>
+      </a>
+
+      <button id="menu-btn" class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-panel">
+        <span class="menu-lines" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="menu-label">Menu</span>
+      </button>
+
+      <div id="menu-panel" class="menu-panel" role="menu">
+        <p class="menu-hi"><span id="username-label"></span></p>
+        <div class="menu-grid">
+          <button class="menu-tile tile-chat active" data-section="chat" type="button"><img src="assets/pals/fox.png" alt=""><b>Chat</b><small>ngobrol &amp; dikoreksi</small></button>
+          <button class="menu-tile tile-practice" data-section="practice" type="button"><img src="assets/pals/tiger.png" alt=""><b>Practice</b><small>quiz dari salahmu</small></button>
+          <button class="menu-tile tile-progress" data-section="progress" type="button"><img src="assets/pals/shiba.png" alt=""><b>Progress</b><small>lihat perkembangan</small></button>
+          <button class="menu-tile tile-pals" data-section="pals" type="button"><img src="assets/pals/pig.png" alt=""><b>Pals</b><small>kenalan sama tim</small></button>
+        </div>
+        <button id="logout-btn" class="logout-btn" type="button">Log out</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="section-chat" class="agent-section active">
+        <div class="chat-intro agent-intro">
+          <div>
+            <span class="eyebrow">AI ENGLISH LEARNING AGENT</span>
+            <h1>Let's learn with Hop Hop <img class="title-crab" src="assets/hophop-crab.png" alt=""></h1>
+            <p>Ngobrol seperti biasa. Hop Hop akan memahami tujuanmu, mengingat kesalahanmu, dan membantu menentukan latihan berikutnya.</p>
+          </div>
+        </div>
+
+        <section class="chat-card">
+          <div id="chat-box" aria-live="polite"></div>
+          <form id="chat-form" class="composer">
+            <input type="text" id="user-input" placeholder="Try: I go to campus yesterday..." autocomplete="off" required>
+            <button class="send-btn" type="submit" aria-label="Send message">➜</button>
+          </form>
+        </section>
+      </section>
+
+      <section id="section-progress" class="agent-section">
+        <div class="page-heading">
+          <div><span class="eyebrow">YOUR LEARNING MEMORY</span><h2>My Progress 📈</h2><p>Progress ini berasal dari interaksi kamu dengan Hop Hop.</p></div>
+          <button id="refresh-progress" class="small-action">↻ Refresh</button>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card"><span>Kesalahan tercatat</span><strong id="stat-total">—</strong><small>learning moments</small></article>
+          <article class="stat-card"><span>Perlu direview</span><strong id="stat-review">—</strong><small>belum direview</small></article>
+          <article class="stat-card"><span>Sudah direview</span><strong id="stat-reviewed">—</strong><small>reviewed</small></article>
+          <article class="stat-card"><span>Fokus utama</span><strong id="stat-focus">—</strong><small>berdasarkan riwayat</small></article>
+        </div>
+        <div class="progress-grid">
+          <article class="panel-card"><div class="panel-title"><h3>Weakness map</h3><span>Agent insight</span></div><div id="category-list" class="category-list"><p class="empty">Belum ada data.</p></div></article>
+          <article class="panel-card"><div class="panel-title"><h3>Quiz history</h3><span>Latest attempts</span></div><div id="quiz-history" class="history-list"><p class="empty">Belum ada quiz.</p></div></article>
+        </div>
+        <article class="panel-card mistakes-panel"><div class="panel-title"><h3>Recent mistakes</h3><span>Latest learning memory</span></div><div id="mistakes-list" class="mistakes-list"><p class="empty">Belum ada kesalahan yang tercatat.</p></div></article>
+      </section>
+
+      <section id="section-practice" class="agent-section">
+        <div class="page-heading"><div><span class="eyebrow">ADAPTIVE PRACTICE</span><h2>Practice 🧠</h2><p>Soal dibuat dari kesalahan yang pernah kamu lakukan.</p></div></div>
+        <div id="quiz-start-card" class="practice-start panel-card">
+          <img src="assets/pals/tiger.png" alt="Tiger" class="practice-pal">
+          <div><h3>Ready for a quick review?</h3><p>Hop Hop akan mengambil beberapa learning mistakes milikmu lalu membuat soal baru dari sana.</p><button id="start-quiz" class="primary-mini">Start adaptive quiz ✦</button></div>
+        </div>
+        <div id="quiz-card" class="quiz-card panel-card hidden">
+          <div class="quiz-top"><span id="quiz-count">Question 1</span><span id="quiz-score">Score: 0</span></div>
+          <h3 id="quiz-question">Question</h3>
+          <div id="quiz-options" class="quiz-options"></div>
+          <div id="quiz-explanation" class="quiz-explanation hidden"></div>
+          <button id="next-question" class="primary-mini hidden">Next →</button>
+        </div>
+        <div id="quiz-result" class="quiz-result panel-card hidden"></div>
+      </section>
+
+      <section id="section-pals" class="agent-section">
+        <div class="page-heading"><div><span class="eyebrow">MEET THE LEARNING TEAM</span><h2>Hop Hop's Pals 🐾</h2><p>Setiap pal punya peran belajar. Mereka bukan cuma dekorasi—mereka mewakili mode belajar yang bisa dikembangkan.</p></div></div>
+        <div class="pals-grid">
+          <article class="pal-card"><img src="assets/pals/tiger.png" alt="Tiger"><div><span>Grammar Buddy</span><h3>Tiger</h3><p>Teman buat membedah struktur dan grammar.</p></div></article>
+          <article class="pal-card"><img src="assets/pals/pig.png" alt="Pig"><div><span>Daily Practice</span><h3>Pig</h3><p>Teman buat latihan singkat dan konsisten.</p></div></article>
+          <article class="pal-card"><img src="assets/pals/mouse.png" alt="Mouse"><div><span>Vocabulary Buddy</span><h3>Mouse</h3><p>Teman buat memperkuat kosakata baru.</p></div></article>
+          <article class="pal-card"><img src="assets/pals/fox.png" alt="Fox"><div><span>Conversation Buddy</span><h3>Fox</h3><p>Teman ngobrol santai dalam bahasa Inggris.</p></div></article>
+          <article class="pal-card"><img src="assets/pals/shiba.png" alt="Shiba"><div><span>Confidence Buddy</span><h3>Shiba</h3><p>Teman yang bantu kamu berani mencoba.</p></div></article>
+          <article class="pal-card"><img src="assets/pals/lion.png" alt="Lion"><div><span>Challenge Buddy</span><h3>Lion</h3><p>Teman buat naik level saat kamu siap.</p></div></article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+  <script src="menu.js"></script>
+  <script src="pals.js"></script>
+</body>
+</html>

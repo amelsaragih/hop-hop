@@ -1,0 +1,22 @@
+{
+  "name": "hop-hop-ai-agent",
+  "version": "2.0.0",
+  "description": "Hop Hop — AI English Learning Agent with Gemini function calling and MySQL learning memory",
+  "main": "backend/index.js",
+  "scripts": {
+    "start": "node backend/index.js",
+    "dev": "node --watch backend/index.js",
+    "check": "node --check backend/index.js && node --check backend/progress-store.js && node --check frontend/script.js"
+  },
+  "keywords": ["gemini", "ai-agent", "english-learning", "express", "mysql"],
+  "type": "module",
+  "dependencies": {
+    "@google/genai": "^1.39.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.24.4"
+  }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hop Hop — English Buddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-visual">
+      <div class="visual-brand"><span class="brand-dot"></span> Hop Hop</div>
+
+      <div class="visual-copy">
+        <span class="eyebrow">YOUR LITTLE ENGLISH BUDDY ✦</span>
+        <h1>Ready for<br><span>Hop Hop?</span></h1>
+        <p>Belajar English tanpa tegang. Ngobrol, salah, dikoreksi, lalu coba lagi bareng si kecil favoritmu.</p>
+      </div>
+
+      <div class="frog-wrap" id="frog-wrap">
+        <div class="frog-shadow"></div>
+        <div class="frog-card">
+          <img src="assets/hophop-crab.png" alt="Hop Hop mascot">
+        </div>
+        <span class="bubble bubble-one">hop! 👋</span>
+        <span class="bubble bubble-two">let's learn ✨</span>
+        <span class="bubble bubble-three">yay!</span>
+      </div>
+
+      <img class="sticker pal pal-mouse s-1" src="assets/pals/mouse.png" alt="">
+      <img class="sticker pal pal-pig s-2" src="assets/pals/pig.png" alt="">
+    </section>
+
+    <section class="auth-card">
+      <div class="auth-logo"><span>H</span> Hop Hop</div>
+
+      <div class="auth-heading">
+        <span class="mini-badge">ENGLISH PRACTICE</span>
+        <h2 id="auth-title"><span id="auth-title-text">Welcome back!</span><img class="title-pal" id="title-pal" src="assets/pals/shiba.png" alt=""></h2>
+        <p id="auth-subtitle">Masuk lagi dan lanjut ngobrol sama Hop Hop.</p>
+      </div>
+
+      <div class="mode-switch" role="tablist">
+        <button id="login-tab" class="mode-tab active" type="button">Login</button>
+        <button id="register-tab" class="mode-tab" type="button">Register</button>
+        <span class="mode-slider"></span>
+      </div>
+
+      <form id="auth-form">
+        <label>
+          Username
+          <div class="input-wrap">
+            <span class="input-icon">●</span>
+            <input type="text" id="username" placeholder="yourname" autocomplete="username" required>
+          </div>
+        </label>
+
+        <label>
+          Password
+          <div class="input-wrap">
+            <span class="input-icon">●</span>
+            <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required>
+            <button id="password-toggle" class="password-toggle" type="button">Show</button>
+          </div>
+        </label>
+
+        <button class="primary-btn" type="submit" id="submit-btn">
+          <span>Let's Hop!</span><b>↗</b>
+        </button>
+      </form>
+
+      <p id="auth-message" class="auth-message" aria-live="polite"></p>
+
+      <p class="auth-toggle-text">
+        <span id="toggle-text">Belum punya akun?</span>
+        <a href="#" id="toggle-mode">Daftar di sini</a>
+      </p>
+
+      <p class="tiny-note">Small steps, tiny mistakes, big progress. 🌱</p>
+    </section>
+  </main>
+  <script src="login.js"></script>
+  <script src="pals.js"></script>
+</body>
+</html>
