@@ -3,11 +3,18 @@ import 'dotenv/config.js';
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST || '127.0.0.1',
+  port: Number(process.env.DB_PORT) || 4000,
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'english_chatbot',
+  database: process.env.DB_NAME || 'test',
+  ssl: {
+    minVersion: 'TLSv1.2',
+    rejectUnauthorized: true,
+  },
   waitForConnections: true,
-  connectionLimit: 10,
+  connectionLimit: 1,
+  maxIdle: 1,
+  enableKeepAlive: true,
 });
 
 async function initTables() {

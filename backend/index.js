@@ -1,7 +1,7 @@
 import 'dotenv/config.js';
 import express from 'express';
 import cors from 'cors';
-import session from 'express-session';
+import cookieSession from 'cookie-session';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI, Type } from '@google/genai';
@@ -26,11 +26,14 @@ const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
 app.use(express.json({ limit: '1mb' }));
 app.use(cors({ origin: true, credentials: true }));
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'ganti-secret-ini-di-env',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+app.set('trust proxy', 1);
+app.use(cookieSession({
+  name: 'hophop_session',
+  keys: [process.env.SESSION_SECRET || 'ganti-secret-ini-di-env'],
+  maxAge: 1000 * 60 * 60 * 24 * 7,
+  httpOnly: true,
+  sameSite: 'lax',
+  secure: !!process.env.VERCEL,
 }));
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
@@ -72,7 +75,10 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-app.post('/api/logout', (req, res) => req.session.destroy(() => res.json({ message: 'Logout berhasil' })));
+app.post('/api/logout', (req, res) => {
+  req.session = null;
+  res.json({ message: 'Logout berhasil' });
+});
 
 app.get('/api/me', (req, res) => {
   if (!req.session.userId) return res.status(401).json({ message: 'Belum login' });
@@ -263,5 +269,9 @@ app.get(/.*/, (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'));
 });
 
-const PORT = Number(process.env.PORT) || 3000;
-app.listen(PORT, () => console.log(`Hop Hop Agent ready on http://localhost:${PORT}`));
+export default app;
+
+if (!process.env.VERCEL) {
+  const PORT = Number(process.env.PORT) || 3000;
+  app.listen(PORT, () => console.log(`Hop Hop Agent ready on http://localhost:${PORT}`));
+}
